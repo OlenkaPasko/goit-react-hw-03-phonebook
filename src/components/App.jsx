@@ -19,12 +19,21 @@ export class App extends Component {
     name: '',
     number: '',
   };
-  componentDidMount() {}
+  componentDidMount() {
+    //чи є контакт
+    const savedContacts = localStorage.getItem('contacts');
+    //console.log(savedContacts);
+    if (savedContacts !== null) {
+      const parsedContacts = JSON.parse(savedContacts);
+      this.setState({ contacts: parsedContacts });
+    }
+  }
 
   componentDidUpdate(_, prevState) {
+    console.log(prevState.contacts);
     if (this.state.contacts !== prevState.contacts) {
-        localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
-     }
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
   }
 
   addContact = values => {
