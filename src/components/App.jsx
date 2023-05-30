@@ -18,10 +18,9 @@ export class App extends Component {
     //чи є контакт
     const savedContacts = localStorage.getItem('contacts');
     //console.log(savedContacts);
-    if (savedContacts !== null) {
-      const parsedContacts = JSON.parse(savedContacts);
-      if (parsedContacts) this.setState({ contacts: parsedContacts });
-    }
+    const parsedContacts = JSON.parse(savedContacts);
+    if (!parsedContacts) return;
+      this.setState({ contacts: parsedContacts });
   }
 
   componentDidUpdate(_, prevState) {
